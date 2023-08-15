@@ -1,24 +1,47 @@
-require('dotenv').config();
-const { Configuration, OpenAIApi } = require("openai");
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+app.use(bodyParser.json());
+
+const {
+    Configuration,
+    OpenAIApi
+} = require("openai");
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
 
-const generateResponse = async (prompt) => {
-  const response = await openai.createCompletion({
-    model: "text-davinci-003", 
-    prompt: prompt,
-    temperature: 0.7,
-    max_tokens: 256,
-    top_p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0
-  });
+app.post('/generate', async (req, res) => {
+    const {
+        prompt,
+        model,
+        temperature,
+        max_tokens
+    } = req.body;
 
-  return response.data.choices[0].text;
-}
+    const generateResponse = async (prompt) => {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: prompt,
+            temperature: 0.7,
+            max_tokens: 256,
+            top_p: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0
+        });
 
-module.exports = { generateResponse }
+        return response.data.choices[0].text;
+    }
+    res.json({
+        bot: response.data.choices[0].text
+    });
+})
+
+app.listen(3000, () => {
+    console.log('API listening on port 3000!');
+})
