@@ -41,6 +41,56 @@ API key and model can be configured in `.env`.
 - express
 - openai
 
+
+## TODO
+TODO list of improvements that could be made to the Express + OpenAI API:
+### Error Handling
+
+- [ ] Add try/catch blocks in route handlers
+- [ ] Implement error handling middleware
+
+### Validation 
+
+- [ ] Validate requests using Joi
+- [ ] Return 400 errors for invalid requests
+
+### Authentication
+
+- [ ] Implement API key authentication 
+- [ ] Add authentication middleware
+
+### Logging 
+
+- [ ] Add request logging
+- [ ] Implement logger like Winston
+
+### Testing
+
+- [ ] Add unit tests with Jest 
+- [ ] Add integration tests
+
+### Documentation
+
+- [ ] Add Swagger API docs
+- [ ] Generate docs from code comments
+
+### Deployment
+
+- [ ] Containerize with Docker
+- [ ] Setup CI/CD workflow
+
+### Code Structure
+
+- [ ] Modularize code into directories
+- [ ] Use dependency injection pattern
+
+## Other
+
+- [ ] Add rate limiting
+- [ ] Improve input sanitization
+- [ ] Add monitoring and alerts
+
+
 ## License
 
 MIT
